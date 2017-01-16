@@ -1,0 +1,17 @@
+{
+  "name": "nested-includer",
+  "homepage": "https://github.com/Pancake-CMS/nested-includer",
+  "authors": [
+    "Prateek Jadhwani <prateekjadhwani@users.noreply.github.com>"
+  ],
+  "description": "",
+  "main": "nested-includer.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

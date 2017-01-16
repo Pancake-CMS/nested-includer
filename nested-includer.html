@@ -1,0 +1,27 @@
+<script>
+    NestedIncluderBehavior = {
+        properties: {
+            isContentMode: {
+                type: Boolean,
+                value: false,
+                notify: true
+            },
+
+            isEditMode: {
+                type: Boolean,
+                value: false,
+                notify: true
+            },
+
+            parentId: {
+                type: String,
+                notify: true
+            }
+        },
+
+        ready: function() {
+            console.log('hello nested includer');
+        }
+
+    }
+</script>
