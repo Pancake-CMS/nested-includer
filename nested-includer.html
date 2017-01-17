@@ -7,7 +7,7 @@
                 notify: true
             },
 
-            isEditMode: {
+            inEditMode: {
                 type: Boolean,
                 value: false,
                 notify: true
@@ -16,11 +16,43 @@
             parentId: {
                 type: String,
                 notify: true
+            },
+
+            innercomponents: {
+                type: Object,
+                notify: true
+            },
+
+            path: {
+                type: String,
+                notify: true
             }
         },
 
         ready: function() {
-            console.log('hello nested includer');
+            this._handleCssGrids();
+        },
+
+        _handleCssGrids: function() {
+            var contentDivs = Polymer.dom(this.root).querySelectorAll('content-slot');
+                for(var i =0 ; i < contentDivs.length; i++) {
+                    var cssGrid = document.createElement('css-grid'),
+                        contentDivId = contentDivs[i].getAttribute('id'),
+                        path = this.path + this.id + '/components/' + contentDivId + '/';
+
+                    cssGrid.setAttribute('path', path);
+                    if(this.inEditMode) {
+                        cssGrid.setAttribute('in-edit-mode', this.inEditMode);
+                        cssGrid.addDragEvents();
+                    }
+
+                    if(this.inContentMode) {
+                        cssGrid.setAttribute('in-content-mode', this.inContentMode);
+                    }
+
+                    cssGrid.setAttribute('rawcomponents', JSON.stringify(this.innercomponents[contentDivId]));
+                    Polymer.dom(this.root).insertBefore(cssGrid, contentDivs[i]);
+                }
         }
 
     }
