@@ -1,7 +1,7 @@
 <script>
     NestedIncluderBehavior = {
         properties: {
-            isContentMode: {
+            inContentMode: {
                 type: Boolean,
                 value: false,
                 notify: true
@@ -38,7 +38,8 @@
                 for(var i =0 ; i < contentDivs.length; i++) {
                     var cssGrid = document.createElement('css-grid'),
                         contentDivId = contentDivs[i].getAttribute('id'),
-                        path = this.path + this.id + '/components/' + contentDivId + '/';
+                        path = this.path + this.id + '/components/' + contentDivId + '/',
+                        rawcomponents = !!this.innercomponents ? JSON.stringify(this.innercomponents[contentDivId]) : '{}';
 
                     cssGrid.setAttribute('path', path);
                     if(this.inEditMode) {
@@ -50,10 +51,9 @@
                         cssGrid.setAttribute('in-content-mode', this.inContentMode);
                     }
 
-                    cssGrid.setAttribute('rawcomponents', JSON.stringify(this.innercomponents[contentDivId]));
+                    cssGrid.setAttribute('rawcomponents', rawcomponents);
                     Polymer.dom(this.root).insertBefore(cssGrid, contentDivs[i]);
                 }
         }
-
     }
 </script>
